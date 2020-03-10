@@ -1,0 +1,32 @@
+extends layout.pug
+
+block content
+    section#system.resume-section.p-3.p-lg-5.d-flex.align-items-center
+        .col-12
+            h1.mb-0.text-center.admin-font-head
+                | TENT's
+                span(style='color: #B79C58;') Hotel reservation system
+            .subheading.mb-5.text-center(style='opacity: 0.5;') hotel management system.
+            .text-center
+                .col-12(align='center')
+                    form(id="sendLoginForm", method="POST", action="/auth/login")
+                        .input-group.col-md-4.col-sm-6
+                            .input-group-prepend
+                                .input-group-text.badge-textbox-black
+                                    i.fas.fa-user
+                            input#username.form-control(name='username', placeholder='Username', required='')
+                        br
+                        .input-group.col-md-4.col-sm-6
+                            .input-group-prepend
+                                .input-group-text.badge-textbox-black
+                                    i.fas.fa-key
+                            input#password.form-control(name='password', placeholder='Password', type='password', required='')
+                        br
+                        .col-8.row(style='justify-content: center')
+                            .form-group.col-4
+                                input.btn(type='submit', value='Login', style='background-color: #4D4C48;color: white;')
+                            .form-group.col-4
+                                a(href='/register')
+                                    input.btn(type='button', value='register', style='background-color: #4D4C48;color: white;')
+                            br
+                        span#loginSuccess.sm-font-admin #{message}
