@@ -71,3 +71,24 @@ router.post(
 );
 
 module.exports = router;
+
+// module.exports = function(passport){
+//   router.get('/', function(req, res, next) {
+//     var body = req.body,
+//         username = body.username,
+//         password = body.password;
+//     User.findOne({username: username},function(err,doc){
+//       if(err){
+//         res.status(500).send('Error occured.')
+//       }else{
+//         if(doc){
+//           res.status(500).send('Username already exists.')
+//         }else{
+//           var record = new User()
+//           record.username = username
+//         }
+//       }
+//     })
+//   });
+//   return router;
+// }

@@ -5,9 +5,12 @@ const userSchema = new Schema({
   name: String,
   username: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
-  password: String
+  password: {
+    type: String,
+    required: true}
 });
 
 const UserModel = mongoose.model('userlist', userSchema);
