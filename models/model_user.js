@@ -6,13 +6,17 @@ const userSchema = new Schema({
   username: {
     type: String,
     unique: true,
-    required: true
+    //required: true
   },
   password: {
     type: String,
-    required: true}
+    //required: true
+  },
+  task:[{
+    desc: String
+  }]
 });
 
-const UserModel = mongoose.model('userlist', userSchema);
+const UserModel = mongoose.model('userlists', userSchema ,'userlists');
 
 module.exports = UserModel;

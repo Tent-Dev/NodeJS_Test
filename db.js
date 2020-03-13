@@ -4,3 +4,4 @@ mongoose.connect('mongodb+srv://chutipas:TaTent591220306@cluster0-94rnq.mongodb.
   useCreateIndex: true,
   useUnifiedTopology: true
 });
+mongoose.set('useFindAndModify', false);

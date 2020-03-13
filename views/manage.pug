@@ -1,0 +1,22 @@
+extends layout.pug
+block nav
+	include navbar.pug
+	block content
+	div.col-12.text-center
+		input(type="button", value="Add", class='btn btn-primary', data-toggle="modal", data-target="#exampleModalCenter")
+
+	// Modal
+	#exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+		.modal-dialog.modal-dialog-centered(role='document')
+			.modal-content
+				.modal-header
+					h5#exampleModalLongTitle.modal-title Modal title
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true') ×
+				.modal-body
+					form(method='POST', action="/CRUD/add")
+						textarea#desc_add(name="desc_add", cols="30", rows="10")
+						button.btn.btn-primary(type='submit') Save changes
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					

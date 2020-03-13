@@ -25,6 +25,10 @@ router.get('/home', isLoggedIn, (req, res) => {
 	res.render('home',{show_message: req.user.username, show_id: req.user.id});
 });
 
+router.get('/manage', isLoggedIn, (req, res) => {
+	res.render('manage',{show_message: req.user.username, show_id: req.user.id});
+});
+
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');

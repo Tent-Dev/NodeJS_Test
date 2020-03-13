@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
+var crudRouter = require('./routes/CRUD');
+
 var connect_db = require('./db');
 const session = require('express-session');
 const passport = require('passport');
@@ -94,8 +96,10 @@ passport.deserializeUser((id, callback) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Set path
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/CRUD', crudRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
