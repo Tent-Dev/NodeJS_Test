@@ -4,6 +4,22 @@ block nav
 	block content
 	div.col-12.text-center
 		input(type="button", value="Add", class='btn btn-primary', data-toggle="modal", data-target="#exampleModalCenter")
+		p Task
+		div.row
+			each data in task
+				div.col-12.col-sm-12.col-lg-3.col-md-4(style='margin-bottom: 10px;')
+					.card.shadow-sm
+						.card-header.text-left
+							span.badge.badge-info
+								|Task #{data._id}
+						.card-body
+							div #{data.desc}
+						.card-footer
+							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
+								div.col-6
+									button(class='edit_btn btn btn-sm btn-outline-primary' data-id= data._id) Edit
+								div.col-6
+									button(class='delete_btn btn btn-sm btn-outline-danger' data-id= data._id) Delete
 
 	// Modal
 	#exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')

@@ -78,7 +78,7 @@ passport.use(
 
 //send data to session
 passport.serializeUser((user, callback) => {
-    console.log('======> Serizlize data ID: '+user._id);
+    console.log('======> Serizlize data ID: '+user.id);
     callback(null, user.id);
 });
 

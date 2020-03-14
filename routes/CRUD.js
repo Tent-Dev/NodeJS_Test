@@ -3,15 +3,18 @@ const router = express.Router();
 const CRUD = require('../models/model_user');
 
 router.post('/add', async (req, res) => {
+	var id = req.user.id;
 	console.log('======> Username ref: '+req.user.username)
 	var { desc_add } = req.body;
-	var id = req.user.id;
 	var username = req.user.username;
   
 	// simple validation
 	if (!desc_add) {
-	  return res.render('manage', { message: 'Please try again' });
+		console.log('======> Don\'t have description to add.')
+		res.redirect('/manage');
+	  	// return res.render('manage', { message: 'Please try again' });
 	}
+	console.log('======>Get data : '+desc_add)
 
 	const user = new CRUD({
 		username,
@@ -22,15 +25,14 @@ router.post('/add', async (req, res) => {
 				'\nDescription: '+desc_add+
 				'\n=====================');
 
-	await CRUD.findOneAndUpdate({'_id': id}, {$push: {'task': {'desc': desc_add}}}, {new: true}/*return updated data*/ ,function(err, doc) {
-		console.log('======> Update data: '+ doc.task)
+	CRUD.findOneAndUpdate({'_id': id}, {$push: {'task': {'desc': desc_add}}}, {new: true}/*return updated data*/ ,function(err, doc) {
 		if(err){
 			console.log('======> Update status: Cannot Update');
 		}else{
 			console.log('======> Update status: Success!');
 		}
+		res.redirect('/manage');
 	});
-	res.redirect('/manage');
   });
 
   module.exports = router;
