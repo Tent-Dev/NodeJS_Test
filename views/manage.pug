@@ -12,6 +12,7 @@ block nav
 						.card-header.text-left
 							span.badge.badge-info
 								|Task #{data._id}
+							p(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
 						.card-body
 							div #{data.desc}
 						.card-footer
@@ -35,4 +36,8 @@ block nav
 						button.btn.btn-primary(type='submit') Save changes
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+	
+	//Script
+	script(src="./javascripts/CRUD_Script.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous")
 					

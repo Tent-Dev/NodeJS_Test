@@ -25,70 +25,24 @@ router.post('/register', async (req, res) => {
   res.render('index', { user });
 });
 
-/* Session check */
-// router.get('/login', isLoggedIn, function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
-// router.post('/login', async (req, res) => {
-//   console.log(req.body);
-//   const { username, password } = req.body;
-
-//   // simple validation
-//   if (!username || !password) {
-//     return res.render('register', { message: 'Please try again' });
-//   }
-
-//   const user = await User.findOne({
-//     username
-//   });
-
-//   if (user) {
-//     const isCorrect = bcrypt.compareSync(password, user.password);
-
-//     if (isCorrect) {
-//     	//Save session
-//     	req.user = user;
-//       	return res.render('home', { message: username });
-//     } else {
-//       	return res.render('index', { message: 'Username or Password incorrect' });
-//     }
-//   } else {
-//    		return res.render('index', { message: 'Username does not exist.' });
-//   }
-// });
-
-router.post(
-  '/login',
+router.post('/login',
   passport.authenticate('local', {
     failureRedirect: '/', // กำหนด ถ้า login fail จะ redirect ไป /login
-    successRedirect: '/home' // ถ้า success จะไป /
-  }),
-  async (req, res) => {
-    const { username, password } = req.body;
-    return res.redirect('/');
+    successRedirect: '/home', // ถ้า success จะไป /
+    failureFlash : 'Username or Password is valid'
+  }),(req, res) =>{
+    console.log('TEST');
   }
+  // async (req, res) => {
+  //   const { username, password } = req.body;
+  //   return res.redirect('/');
+  // }
 );
 
-module.exports = router;
+router.get('/', function(req,res){
+  console.log('TEST');
+  console.log(req.flash('message'));
+  res.send();
+});
 
-// module.exports = function(passport){
-//   router.get('/', function(req, res, next) {
-//     var body = req.body,
-//         username = body.username,
-//         password = body.password;
-//     User.findOne({username: username},function(err,doc){
-//       if(err){
-//         res.status(500).send('Error occured.')
-//       }else{
-//         if(doc){
-//           res.status(500).send('Username already exists.')
-//         }else{
-//           var record = new User()
-//           record.username = username
-//         }
-//       }
-//     })
-//   });
-//   return router;
-// }
+module.exports = router;

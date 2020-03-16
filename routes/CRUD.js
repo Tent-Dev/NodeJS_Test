@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const CRUD = require('../models/model_user');
+const CRUD_Task = require('../models/model_task');
 
 router.post('/add', async (req, res) => {
 	var id = req.user.id;
@@ -16,23 +17,31 @@ router.post('/add', async (req, res) => {
 	}
 	console.log('======>Get data : '+desc_add)
 
-	const user = new CRUD({
-		username,
-		desc: desc_add,
-	});
 	console.log('======> Add data <======\nID: '+id+
 				'\nUsername: '+username+
 				'\nDescription: '+desc_add+
 				'\n=====================');
-
-	CRUD.findOneAndUpdate({'_id': id}, {$push: {'task': {'desc': desc_add}}}, {new: true}/*return updated data*/ ,function(err, doc) {
+	var my_task = {
+		account: username,
+		desc: desc_add
+	}
+	CRUD_Task.create(my_task ,function(err, doc) {
 		if(err){
-			console.log('======> Update status: Cannot Update');
+			console.log('======> Add status: Cannot Update');
 		}else{
-			console.log('======> Update status: Success!');
+			console.log('======> Add status: Success!');
 		}
 		res.redirect('/manage');
 	});
   });
+
+router.delete('/delete/:id',(req, res)=>{
+  CRUD_Task.deleteOne({_id: req.params.id})
+  .then(() => {
+	  res.json({success: true});
+  }).catch((err) => {
+	  res.status.json({err: err});
+  });
+})
 
   module.exports = router;
