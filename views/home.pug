@@ -2,6 +2,30 @@ extends layout.pug
 block nav
 	include navbar.pug
 	block content
-	div.col-12.text-center
-		h1 Welcome #{show_message}
+	div.col-12.text-center(style='margin-top: 10px;')
+		h1 Welcome #{show_username}
 		h3 ID: #{show_id}
+	.col-12(style='margin-top: 3em; margin-bottom: 3em;')
+		p.line.shadow-sm
+			span.text_on_line Explore all task
+
+	div.col-12.text-center(style='margin-top: 10px;')
+		div.row
+			each data in task
+				div.col-12.col-sm-12.col-lg-3.col-md-4(style='margin-bottom: 10px;')
+					.card.shadow-sm
+						.card-header.text-left
+							span.badge.badge-info
+								|Task #{data._id}
+							div(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
+							div(style='font-size:0.75em;')
+								i(class="fas fa-user")
+								|&nbsp;#{data.account}
+						.card-body
+							div #{data.desc}
+						.card-footer
+							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
+								div.col-12
+									button(class='edit_btn btn btn-sm btn-outline-success' data-id= data._id)
+										i(class="far fa-eye")
+										|&nbsp;View

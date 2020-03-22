@@ -23,8 +23,19 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/home', isLoggedIn, (req, res) => {
-	console.log('Welcome');
-	res.render('home',{show_message: req.user.username, show_id: req.user.id});
+  console.log('Welcome');
+  console.log('======> Result: Finding...');
+  CRUD_Task.find({},(function(err, result){
+    if (err) throw err;
+    console.log('======> Result: Below');
+    console.log(result);
+    res.render('home',{
+      show_username: req.user.username,
+      show_id: req.user.id,
+      task: result,
+      moment: require('moment')
+    });
+  }))
 });
 
 router.get('/manage', isLoggedIn, (req, res) => {
@@ -34,7 +45,7 @@ router.get('/manage', isLoggedIn, (req, res) => {
     console.log('======> Result: Below');
     console.log(result);
     res.render('manage',{
-      show_message: req.user.username,
+      show_username: req.user.username,
       show_id: req.user.id,
       task: result,
       moment: require('moment')

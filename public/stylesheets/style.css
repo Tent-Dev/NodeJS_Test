@@ -8,3 +8,29 @@
 	color: white;
 	text-align: center;
 }
+
+.blur{
+	-webkit-filter: blur(2px); /* Chrome, Safari, Opera */
+	filter: blur(2px);
+}
+
+.card{
+	border: 2px solid rgba(0,0,0,.125) !important;
+	border-style: dashed !important;
+}
+
+.line{
+	width: 100%; 
+	text-align: center; 
+	line-height: 0.1em;
+	margin: 10px 0 20px;
+	border-bottom: 2px solid #000;
+	border-image-source: linear-gradient(45deg, rgb(0,143,104,0), rgb(0,143,104,1), rgb(250,224,66,1), rgb(250,224,66,0));
+	border-image-slice: 1;
+ } 
+ 
+ .text_on_line{ 
+	 background:#fff;
+	 padding:0 10px;
+	 font-size: 1.75em;
+ }

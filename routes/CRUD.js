@@ -40,7 +40,7 @@ router.delete('/delete/:id',(req, res)=>{
   .then(() => {
 	  res.json({success: true});
   }).catch((err) => {
-	  res.status.json({err: err});
+	res.json({success: false, err_msg: err});
   });
 })
 

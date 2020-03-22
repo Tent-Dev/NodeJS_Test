@@ -2,17 +2,35 @@ extends layout.pug
 block nav
 	include navbar.pug
 	block content
-	div.col-12.text-center
-		input(type="button", value="Add", class='btn btn-primary', data-toggle="modal", data-target="#exampleModalCenter")
-		p Task
+	div.col-12.text-center(style='margin-top: 10px;')
 		div.row
+			div.col-12.col-sm-12.col-lg-3.col-md-4(style='margin-bottom: 10px;')
+					.card.shadow-sm
+						.card-header.text-left.blur
+							span.badge.badge-info
+								|Task Newtask
+							p(style='font-size:0.75em;') Last Modify: Today
+						.card-body
+							div
+								button(class='btn btn-outline-success', data-toggle="modal", data-target="#exampleModalCenter")
+									i(class="fas fa-plus-circle")
+									|&nbsp;New Task
+						.card-footer.blur
+							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
+								div.col-6
+									button(class='edit_btn btn btn-sm btn-outline-primary', disabled) Edit
+								div.col-6
+									button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', disabled) Delete
 			each data in task
 				div.col-12.col-sm-12.col-lg-3.col-md-4(style='margin-bottom: 10px;')
 					.card.shadow-sm
 						.card-header.text-left
 							span.badge.badge-info
 								|Task #{data._id}
-							p(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
+							div(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
+							div(style='font-size:0.75em;')
+								i(class="fas fa-user")
+								|&nbsp;#{data.account}
 						.card-body
 							div #{data.desc}
 						.card-footer
@@ -20,9 +38,9 @@ block nav
 								div.col-6
 									button(class='edit_btn btn btn-sm btn-outline-primary' data-id= data._id) Edit
 								div.col-6
-									button(class='delete_btn btn btn-sm btn-outline-danger' data-id= data._id) Delete
+									button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', data-id= data._id) Delete
 
-	// Modal
+	// Modal add
 	#exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
 		.modal-dialog.modal-dialog-centered(role='document')
 			.modal-content
@@ -37,7 +55,20 @@ block nav
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 	
+	// Modal Delete
+	#Modal_delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+		.modal-dialog.modal-dialog-centered(role='document')
+			.modal-content
+				.modal-header
+					h5#exampleModalLongTitle.modal-title Confirm Delete
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true') ×
+				.modal-body#show_content_delete
+					//Content
+				.modal-footer(style='justify-content: center;')
+					button.btn.btn-danger(class='delete_btn', type='button') Delete
+	
 	//Script
 	script(src="./javascripts/CRUD_Script.js")
-	script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous")
+	//script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous")
 					
