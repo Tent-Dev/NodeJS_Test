@@ -35,6 +35,31 @@ router.post('/add', async (req, res) => {
 	});
   });
 
+router.post('/query_task/:id',(req, res)=>{
+	CRUD_Task.findOne({_id: req.params.id},(err, result)=>{
+		if (err){
+			console.log('======> Query result: Error');
+			res.json({success: false, err_msg: err});
+		}else{
+			console.log('======> Query result: Below');
+			console.log(result);
+			res.json({success: true, data: result});
+		}
+		
+	})
+})
+
+router.put('/update/:id/:desc',(req, res)=>{
+	CRUD_Task.updateOne({_id: req.params.id},{$set:{desc: req.params.desc}})
+	.then((obj) => {
+		console.log('======> Updated: success');
+		res.json({success: true, data: obj});
+	}).catch((err) => {
+		console.log('======> Updated: Error: ' + err);
+		res.json({success: false, err_msg: err});
+	})
+})
+
 router.delete('/delete/:id',(req, res)=>{
   CRUD_Task.deleteOne({_id: req.params.id})
   .then(() => {

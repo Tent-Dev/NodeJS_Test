@@ -18,7 +18,7 @@ block nav
 						.card-footer.blur
 							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
 								div.col-6
-									button(class='edit_btn btn btn-sm btn-outline-primary', disabled) Edit
+									button(class='edit_ShowModal_btn btn btn-sm btn-outline-primary', disabled) Edit
 								div.col-6
 									button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', disabled) Delete
 			each data in task
@@ -36,7 +36,7 @@ block nav
 						.card-footer
 							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
 								div.col-6
-									button(class='edit_btn btn btn-sm btn-outline-primary' data-id= data._id) Edit
+									button(class='edit_ShowModal_btn btn btn-sm btn-outline-primary' data-id= data._id) Edit
 								div.col-6
 									button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', data-id= data._id) Delete
 
@@ -55,6 +55,19 @@ block nav
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 	
+	// Modal Edit
+	#Modal_edit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+		.modal-dialog.modal-dialog-centered(role='document')
+			.modal-content
+				.modal-header
+					h5#exampleModalLongTitle.modal-title Confirm Edit
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true') ×
+				.modal-body#show_content_edit
+					//Content
+				.modal-footer(style='justify-content: center;')
+					button.btn.btn-success(class='edit_btn', type='button') Save
+
 	// Modal Delete
 	#Modal_delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
 		.modal-dialog.modal-dialog-centered(role='document')
@@ -70,5 +83,3 @@ block nav
 	
 	//Script
 	script(src="./javascripts/CRUD_Script.js")
-	//script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous")
-					
