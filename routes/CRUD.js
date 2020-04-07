@@ -6,7 +6,7 @@ const CRUD_Task = require('../models/model_task');
 router.post('/add', async (req, res) => {
 	var id = req.user.id;
 	console.log('======> Username ref: '+req.user.username)
-	var { desc_add } = req.body;
+	var { desc_add, task_name_add } = req.body;
 	var username = req.user.username;
   
 	// simple validation
@@ -15,14 +15,17 @@ router.post('/add', async (req, res) => {
 		res.redirect('/manage');
 	  	// return res.render('manage', { message: 'Please try again' });
 	}
-	console.log('======>Get data : '+desc_add)
+	console.log('======>Get data : '+desc_add+
+				'======>Get data : '+task_name_add)
 
 	console.log('======> Add data <======\nID: '+id+
 				'\nUsername: '+username+
+				'\nTask name: '+task_name_add+
 				'\nDescription: '+desc_add+
 				'\n=====================');
 	var my_task = {
 		account: username,
+		task_name: task_name_add,
 		desc: desc_add
 	}
 	CRUD_Task.create(my_task ,function(err, doc) {
@@ -50,7 +53,9 @@ router.post('/query_task/:id',(req, res)=>{
 })
 
 router.put('/update/:id/:desc',(req, res)=>{
-	CRUD_Task.updateOne({_id: req.params.id},{$set:{desc: req.params.desc}})
+	var now_date = new Date().toISOString();
+	console.log(now_date);
+	CRUD_Task.updateOne({_id: req.params.id},{$set:{desc: req.params.desc, time: now_date}})
 	.then((obj) => {
 		console.log('======> Updated: success');
 		res.json({success: true, data: obj});
@@ -67,6 +72,21 @@ router.delete('/delete/:id',(req, res)=>{
   }).catch((err) => {
 	res.json({success: false, err_msg: err});
   });
+})
+
+router.put('/like/:id',(req, res)=>{
+	console.log('======>data: '+req.body.like)
+	CRUD_Task.updateOne({_id: req.params.id},{$inc: {likes_count: req.body.like}},(err, result)=>{
+		if (err){
+			console.log('======> Like result: Error');
+			res.json({success: false, err_msg: err});
+		}else{
+			console.log('======> Like result: Below');
+			console.log(result);
+			res.json({success: true});
+		}
+		
+	})
 })
 
   module.exports = router;

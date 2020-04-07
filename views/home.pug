@@ -16,11 +16,16 @@ block nav
 					.card.shadow-sm
 						.card-header.text-left
 							span.badge.badge-info
-								|Task #{data._id}
+								|#{data.task_name}
 							div(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
 							div(style='font-size:0.75em;')
 								i(class="fas fa-user")
 								|&nbsp;#{data.account}
+							div(style='font-size:0.75em;')
+								span(class='like-count' data-id= data._id)
+									|#{data.likes_count}
+								|&nbsp;
+								i(class="fas fa-heart", style='color: #d82c2c;')
 						.card-body
 							div #{data.desc}
 						.card-footer
@@ -29,3 +34,9 @@ block nav
 									button(class='edit_btn btn btn-sm btn-outline-success' data-id= data._id)
 										i(class="far fa-eye")
 										|&nbsp;View
+									button(class='like_btn btn btn-sm btn-outline-primary' data-id= data._id style='margin-left: 10px;')
+										i(class="far fa-thumbs-up")
+										|&nbsp;Like
+
+	//Script
+	script(src="./javascripts/Like.js")

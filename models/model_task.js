@@ -7,7 +7,12 @@ const taskSchema = new Schema({
 		default: Date.now
 	},
 	account: String,
-	desc: String
+	task_name: String,
+	desc: String,
+	likes_count: {
+		type: Number,
+		default: 0
+	}
 });
 
 const TaskModel = mongoose.model('tasklists', taskSchema ,'tasklists');

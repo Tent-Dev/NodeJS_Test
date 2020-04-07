@@ -26,7 +26,7 @@ block nav
 					.card.shadow-sm
 						.card-header.text-left
 							span.badge.badge-info
-								|Task #{data._id}
+								|#{data.task_name}
 							div(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
 							div(style='font-size:0.75em;')
 								i(class="fas fa-user")
@@ -49,9 +49,21 @@ block nav
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 						span(aria-hidden='true') ×
 				.modal-body
-					form(method='POST', action="/CRUD/add")
-						textarea#desc_add(name="desc_add", cols="30", rows="10")
-						button.btn.btn-primary(type='submit') Save changes
+					form.form-group(method='POST', action="/CRUD/add")
+						.col-12
+							.row
+								.col-4
+									|Task name
+								.col-7
+									input.form-control#task_name_add(type="text", name="task_name_add")
+						.col-12(style='margin-top: 10px;')
+							.row
+								.col-4
+									|Description
+								.col-7
+									textarea.form-control#desc_add(name="desc_add", cols="30", rows="10")
+						.col-12
+							button.btn.btn-primary(type='submit') Save changes
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 	

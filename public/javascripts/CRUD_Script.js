@@ -39,12 +39,12 @@ $(document).ready(function () {
 
 	//Reset id after modal close
 	$('#Modal_delete, #Modal_edit').on('hidden.bs.modal', function (e) {
-		$('.modal-body').empty();
+		$('#show_content_edit, #show_content_delete').empty();
 		$('.delete_btn, .edit_btn').removeAttr('data-id');
 	  })
 });
 
-const query = (id)=>{
+function query(id) {
 	$.ajax({
 		type: "POST",
 		url: "CRUD/query_task/"+id,
@@ -65,7 +65,7 @@ const query = (id)=>{
 	});
 }
 
-const update = (id)=>{
+function update(id) {
 	let desc_edit = $('#desc_edit').val();
 	console.log(desc_edit);
 	$.ajax({
