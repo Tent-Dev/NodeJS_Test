@@ -81,9 +81,17 @@ router.put('/like/:id',(req, res)=>{
 			console.log('======> Like result: Error');
 			res.json({success: false, err_msg: err});
 		}else{
-			console.log('======> Like result: Below');
-			console.log(result);
-			res.json({success: true});
+			CRUD.updateOne({_id: req.user.id},{$push: {liked: {task_id: req.params.id}}},(err2, result2)=>{
+				console.log('======>Account ID: '+req.user.id)
+				if (err2){
+					console.log('======> Save liked to account result: Error');
+					res.json({success: false, err_msg: err2});
+				}else{
+					console.log('======> Save liked to account result: Below');
+					console.log(result2);
+					res.json({success: true});
+				}
+			})
 		}
 		
 	})

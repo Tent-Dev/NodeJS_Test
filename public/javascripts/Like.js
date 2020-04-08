@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	console.log('<%= show_id %>')
 	$('.like_btn').click(function (e) { 
 		e.preventDefault();
 		id = $(this).attr('data-id');

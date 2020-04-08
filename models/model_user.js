@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const ObjectId = Schema.ObjectId;
 const userSchema = new Schema({
   name: String,
   username: {
@@ -12,8 +12,9 @@ const userSchema = new Schema({
     type: String,
     //required: true
   },
-  task:[{
-    desc: String
+  liked:[{
+    _id: false,
+    task_id: ObjectId
   }]
 });
 
