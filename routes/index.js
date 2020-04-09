@@ -47,6 +47,7 @@ router.get('/manage', isLoggedIn, (req, res) => {
     res.render('manage',{
       show_username: req.user.username,
       show_id: req.user.id,
+      show_liked: req.user.liked,
       task: result,
       moment: require('moment')
     });

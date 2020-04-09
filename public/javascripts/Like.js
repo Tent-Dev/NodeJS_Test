@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	console.log('<%= show_id %>')
+	check_liked()
 	$('.like_btn').click(function (e) { 
 		e.preventDefault();
 		id = $(this).attr('data-id');
@@ -31,7 +31,28 @@ $(document).ready(function () {
 				console.log(data)
 				var like_old = parseInt($('.like-count[data-id="'+id+'"]').html());
 				$('.like-count[data-id="'+id+'"]').html(like_old+counter);
+
 			}
 		});
 	});
 });
+
+function check_liked(){
+	var account_id = $('#account_id').text();
+	$.ajax({
+		type: "POST",
+		url: "CRUD/check_liked/"+account_id+"/",
+		data: {
+			id: account_id
+		},
+		success: function (result) {
+			console.log(result);
+			result.data.forEach((data)=>{
+				console.log(data.task_id);
+				$('.like_btn[data-id="'+data.task_id+'"]').removeClass('btn-outline-primary');
+				$('.like_btn[data-id="'+data.task_id+'"]').addClass('btn-primary');
+				$('.like_btn[data-id="'+data.task_id+'"]').html('<i class="far fa-thumbs-down"></i> Unlike');
+			})
+		}
+	});
+}

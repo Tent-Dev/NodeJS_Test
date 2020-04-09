@@ -4,7 +4,8 @@ block nav
 	block content
 	div.col-12.text-center(style='margin-top: 10px;')
 		h1 Welcome #{show_username}
-		h3 ID: #{show_id}
+		h3 ID: 
+			span#account_id #{show_id}
 	.col-12(style='margin-top: 3em; margin-bottom: 3em;')
 		p.line.shadow-sm
 			span.text_on_line Explore all task

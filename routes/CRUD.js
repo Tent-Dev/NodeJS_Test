@@ -75,25 +75,52 @@ router.delete('/delete/:id',(req, res)=>{
 })
 
 router.put('/like/:id',(req, res)=>{
-	console.log('======>data: '+req.body.like)
-	CRUD_Task.updateOne({_id: req.params.id},{$inc: {likes_count: req.body.like}},(err, result)=>{
+	var like_check = req.body.like;
+	console.log('======>data: '+like_check)
+	CRUD_Task.updateOne({_id: req.params.id},{$inc: {likes_count: like_check}},(err, result)=>{
 		if (err){
 			console.log('======> Like result: Error');
 			res.json({success: false, err_msg: err});
 		}else{
-			CRUD.updateOne({_id: req.user.id},{$push: {liked: {task_id: req.params.id}}},(err2, result2)=>{
-				console.log('======>Account ID: '+req.user.id)
-				if (err2){
-					console.log('======> Save liked to account result: Error');
-					res.json({success: false, err_msg: err2});
-				}else{
-					console.log('======> Save liked to account result: Below');
-					console.log(result2);
-					res.json({success: true});
-				}
-			})
+			if(like_check == 1){
+				CRUD.updateOne({_id: req.user.id},{$push: {liked: {task_id: req.params.id}}},(err2, result2)=>{
+					console.log('======>Account ID: '+req.user.id)
+					if (err2){
+						console.log('======> Save liked to account result: Error');
+						res.json({success: false, err_msg: err2});
+					}else{
+						console.log('======> Save liked to account result: Below');
+						console.log(result2);
+						res.json({success: true});
+					}
+				})
+			}else{//Unliked -1
+				CRUD.updateOne({_id: req.user.id},{$pull: {liked: {task_id: req.params.id}}},(err2, result2)=>{
+					console.log('======>Account ID: '+req.user.id)
+					if (err2){
+						console.log('======> Save Unlike to account result: Error');
+						res.json({success: false, err_msg: err2});
+					}else{
+						console.log('======> Save Unlike to account result: Below');
+						console.log(result2);
+						res.json({success: true});
+					}
+				})
+			}
 		}
 		
+	})
+})
+
+router.post('/check_liked/:id',(req, res)=>{
+	CRUD.findById({_id: req.params.id},(err, result)=>{
+		if(err){
+			console.log('======> Check liked: Error');
+			res.json({success: false, err_msg: err});
+		}else{
+			console.log('======> Check liked: Success');
+			res.json({success: true, data: result.liked});
+		}
 	})
 })
 

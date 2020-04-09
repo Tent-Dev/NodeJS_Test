@@ -6,7 +6,10 @@ const taskSchema = new Schema({
 		default: Date.now
 	},
 	account: String,
-	task_name: String,
+	task_name: {
+		type: String,
+		default: "Untitle"
+	},
 	desc: String,
 	likes_count: {
 		type: Number,

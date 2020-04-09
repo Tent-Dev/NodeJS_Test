@@ -62,6 +62,7 @@ passport.use(
                       console.log('======> Find in data: OK ');
                       callback(null,{
                           id: user._id,
+                          liked: user.liked,
                           username: user.username,
                           password: user.password
                       })
