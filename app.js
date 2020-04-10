@@ -9,6 +9,7 @@ var moment = require('moment');
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var crudRouter = require('./routes/CRUD');
+var taskPageRouter = require('./routes/taskPage');
 
 var connect_db = require('./db');
 const session = require('express-session');
@@ -103,6 +104,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/CRUD', crudRouter);
+app.use('/task', taskPageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

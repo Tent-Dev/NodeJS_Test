@@ -52,10 +52,9 @@ router.post('/query_task/:id',(req, res)=>{
 	})
 })
 
-router.put('/update/:id/:desc',(req, res)=>{
+router.put('/update/:id',(req, res)=>{
 	var now_date = new Date().toISOString();
-	console.log(now_date);
-	CRUD_Task.updateOne({_id: req.params.id},{$set:{desc: req.params.desc, time: now_date}})
+	CRUD_Task.updateOne({_id: req.params.id},{$set:{task_name: req.body.task_name, desc: req.body.desc, time: now_date}})
 	.then((obj) => {
 		console.log('======> Updated: success');
 		res.json({success: true, data: obj});
@@ -124,4 +123,4 @@ router.post('/check_liked/:id',(req, res)=>{
 	})
 })
 
-  module.exports = router;
+module.exports = router;

@@ -32,9 +32,10 @@ block nav
 						.card-footer
 							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
 								div.col-12
-									button(class='edit_btn btn btn-sm btn-outline-success' data-id= data._id)
-										i(class="far fa-eye")
-										|&nbsp;View
+									a(href=`/task/${data._id}`)
+										button(class='edit_btn btn btn-sm btn-outline-success' data-id= data._id)
+											i(class="far fa-eye")
+											|&nbsp;View
 									button(class='like_btn btn btn-sm btn-outline-primary' data-id= data._id style='margin-left: 10px;')
 										i(class="far fa-thumbs-up")
 										|&nbsp;Like

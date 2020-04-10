@@ -55,8 +55,20 @@ function query(id) {
 			if (res.success) {
 				console.log('id from ajax call is', res);
 				//render html
-				html = 	'<div align="center"><b>Edit Task: </b>'+id+'</div>'+
-						'<div><textarea id="desc_edit">'+res.data.desc+'</textarea></div>';
+				html = 	'<form class="form-group">'+
+							'<div class="col-12">'+
+								'<div class="row">'+
+									'<div class="col-4">Task name</div>'+
+									'<div class="col-7"><input class="form-control" id="task_name_edit" type="text" name="task_name_edit" value="'+res.data.task_name+'"></div>'+
+								'</div>'+
+							'</div>'+
+							'<div class="col-12" style="margin-top: 10px;">'+
+								'<div class="row">'+
+									'<div class="col-4">Description</div>'+
+									'<div class="col-7"><textarea class="form-control" id="desc_edit">'+res.data.desc+'</textarea></div>'+
+								'</div>'+
+							'</div>'+
+						'</form>';
 				$('#show_content_edit').html(html);
 			} else {
 				console.log(res.err_msg);
@@ -67,12 +79,14 @@ function query(id) {
 
 function update(id) {
 	let desc_edit = $('#desc_edit').val();
+	let task_name_edit = $('#task_name_edit').val();
 	console.log(desc_edit);
 	$.ajax({
 		type: "PUT",
-		url: "CRUD/update/"+id+"/"+desc_edit,
+		url: "CRUD/update/"+id,
 		data: {
 			id: id,
+			task_name: task_name_edit,
 			desc: desc_edit
 		},
 		success: function (res) {

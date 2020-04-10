@@ -31,6 +31,11 @@ block nav
 							div(style='font-size:0.75em;')
 								i(class="fas fa-user")
 								|&nbsp;#{data.account}
+							div(style='font-size:0.75em;')
+								span(class='like-count' data-id= data._id)
+									|#{data.likes_count}
+								|&nbsp;
+								i(class="fas fa-heart", style='color: #d82c2c;')
 						.card-body
 							div #{data.desc}
 						.card-footer
@@ -63,9 +68,8 @@ block nav
 								.col-7
 									textarea.form-control#desc_add(name="desc_add", cols="30", rows="10")
 						.col-12
-							button.btn.btn-primary(type='submit') Save changes
+							button.btn.btn-primary(type='submit') Create New Task
 				.modal-footer
-					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 	
 	// Modal Edit
 	#Modal_edit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')

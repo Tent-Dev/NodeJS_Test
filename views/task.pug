@@ -1,0 +1,8 @@
+extends layout.pug
+block nav
+	include navbar.pug
+	block content
+	if task === 'err'
+		h1 This page not found.
+	else
+		h1 #{task.task_name}
