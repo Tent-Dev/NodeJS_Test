@@ -2,48 +2,49 @@ extends layout.pug
 block nav
 	include navbar.pug
 	block content
-	div.col-12.text-center(style='margin-top: 10px;')
-		div.row
-			div.col-12.col-sm-12.col-lg-3.col-md-4(style='margin-bottom: 10px;')
-					.card.shadow-sm
-						.card-header.text-left.blur
-							span.badge.badge-info
-								|Task Newtask
-							p(style='font-size:0.75em;') Last Modify: Today
-						.card-body
-							div
-								button(class='btn btn-outline-success', data-toggle="modal", data-target="#exampleModalCenter")
-									i(class="fas fa-plus-circle")
-									|&nbsp;New Task
-						.card-footer.blur
-							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
-								div.col-6
-									button(class='edit_ShowModal_btn btn btn-sm btn-outline-primary', disabled) Edit
-								div.col-6
-									button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', disabled) Delete
-			each data in task
-				div.col-12.col-sm-12.col-lg-3.col-md-4(style='margin-bottom: 10px;')
-					.card.shadow-sm
-						.card-header.text-left
-							span.badge.badge-info
-								|#{data.task_name}
-							div(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
-							div(style='font-size:0.75em;')
-								i(class="fas fa-user")
-								|&nbsp;#{data.account}
-							div(style='font-size:0.75em;')
-								span(class='like-count' data-id= data._id)
-									|#{data.likes_count}
-								|&nbsp;
-								i(class="fas fa-heart", style='color: #d82c2c;')
-						.card-body
-							div #{data.desc}
-						.card-footer
-							.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
-								div.col-6
-									button(class='edit_ShowModal_btn btn btn-sm btn-outline-primary' data-id= data._id) Edit
-								div.col-6
-									button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', data-id= data._id) Delete
+	div.container-md
+		div.col-12.text-center(style='margin-top: 10px;')
+			div.row
+				div.col-12.col-sm-12.col-lg-4.col-md-6(style='margin-bottom: 10px;')
+						.card.shadow-sm
+							.card-header.text-left.blur
+								span.badge.badge-info
+									|Task Newtask
+								p(style='font-size:0.75em;') Last Modify: Today
+							.card-body
+								div
+									button(class='btn btn-outline-success', data-toggle="modal", data-target="#exampleModalCenter")
+										i(class="fas fa-plus-circle")
+										|&nbsp;New Task
+							.card-footer.blur
+								.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
+									div.col-6
+										button(class='edit_ShowModal_btn btn btn-sm btn-outline-primary', disabled) Edit
+									div.col-6
+										button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', disabled) Delete
+				each data in task
+					div.col-12.col-sm-12.col-lg-4.col-md-6(style='margin-bottom: 10px;')
+						.card.shadow-sm
+							.card-header.text-left
+								span.badge.badge-info
+									|#{data.task_name}
+								div(style='font-size:0.75em;') Last Modify: #{moment(data.time).format("DD-MM-YYYY HH:mm")}
+								div(style='font-size:0.75em;')
+									i(class="fas fa-user")
+									|&nbsp;#{data.account}
+								div(style='font-size:0.75em;')
+									span(class='like-count' data-id= data._id)
+										|#{data.likes_count}
+									|&nbsp;
+									i(class="fas fa-heart", style='color: #d82c2c;')
+							.card-body
+								div #{data.desc}
+							.card-footer
+								.col-12.row(style='margin-left:0px !important; margin-right:0px !important')
+									div.col-6
+										button(class='edit_ShowModal_btn btn btn-sm btn-outline-primary' data-id= data._id) Edit
+									div.col-6
+										button(class='delete_ShowModal_btn btn btn-sm btn-outline-danger', data-id= data._id) Delete
 
 	// Modal add
 	#exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')

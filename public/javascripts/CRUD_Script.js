@@ -45,6 +45,7 @@ $(document).ready(function () {
 });
 
 function query(id) {
+	$('#show_content_edit').html('<div align="center"><h1><i class="fas fa-circle-notch fa-spin"></i></h1></div>');
 	$.ajax({
 		type: "POST",
 		url: "CRUD/query_task/"+id,

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 const taskSchema = new Schema({
 	time : {
 		type : Date,
@@ -14,7 +15,12 @@ const taskSchema = new Schema({
 	likes_count: {
 		type: Number,
 		default: 0
-	}
+	},
+	comment:[{
+		//_id: false,
+		account_id: ObjectId,
+		comment_desc: String
+	}]
 });
 
 const TaskModel = mongoose.model('tasklists', taskSchema ,'tasklists');

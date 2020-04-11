@@ -22,7 +22,7 @@ $(document).ready(function () {
 		console.log(counter);
 		$.ajax({
 			type: "PUT",
-			url: "CRUD/like/"+id+"/",
+			url: "../CRUD/like/"+id+"/",
 			data: {
 				id: id,
 				like: counter
@@ -41,7 +41,7 @@ function check_liked(){
 	var account_id = $('#account_id').text();
 	$.ajax({
 		type: "POST",
-		url: "CRUD/check_liked/"+account_id+"/",
+		url: "../CRUD/check_liked/"+account_id+"/",
 		data: {
 			id: account_id
 		},

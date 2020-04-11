@@ -34,3 +34,12 @@
 	 padding:0 10px;
 	 font-size: 1.75em;
  }
+
+ .comment_box{
+	align-self: center;
+    border: solid 1px;
+	border-radius: 10px;
+	border-color: silver;
+	background-color: ghostwhite;
+	padding: 5px;
+ }

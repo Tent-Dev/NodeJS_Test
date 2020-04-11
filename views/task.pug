@@ -5,4 +5,41 @@ block nav
 	if task === 'err'
 		h1 This page not found.
 	else
-		h1 #{task.task_name}
+		div.container
+			#account_id(hidden) #{show_id}
+			div.col-12(style='margin-bottom: 10px; margin-top: 10px;')
+				.card.shadow-sm
+					.card-header
+						.row
+							.col-8
+								h1 #{task.task_name}
+								h6 By 
+									i(class="fas fa-user")
+									|&nbsp;#{task.account}
+							.col-4(style='align-self: center;')
+								button(class='like_btn btn btn-sm btn-outline-primary' data-id= task._id style='margin-left: 10px;')
+									i(class="far fa-thumbs-up")
+									|&nbsp;Like
+								span(class='like-count' data-id= task._id style='margin-left: 5px;')
+									|#{task.likes_count}
+								|&nbsp;
+								i(class="fas fa-heart", style='color: #d82c2c;')
+					.card-body
+						.col-12
+							h6 #{task.desc}
+						.col-12(align="right" style="font-size: 0.75em;")
+							|Last modify : #{moment(task.time).format("DD-MM-YYYY HH:mm")}
+					.card-footer
+						.col-12.row#comment
+						.col-12.row.form-group(style='margin-top: 10px;')
+							.col-1(style='align-self: center;')
+								img(src="../images/user.png" width="50px" hight="50px" class='rounded-circle')
+							.col-6
+								textarea#mycomment(class="form-control" name="", cols="30", rows="2" placeholder="Comment here...")
+							.col-3(style='align-self: center;')
+								input#comment_btn(type="button", value="Send" class='btn btn-sm btn-info')
+
+		//Script
+		script(src="../javascripts/Like.js")
+		script(src="../socket.io/socket.io.js")
+		script(src="../javascripts/comment.js")
