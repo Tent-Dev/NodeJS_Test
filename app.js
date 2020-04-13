@@ -12,13 +12,21 @@ var crudRouter = require('./routes/CRUD');
 var taskPageRouter = require('./routes/taskPage');
 
 var connect_db = require('./db');
+//const redis = require('redis');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
 const User = require('./models/model_user');
 const bcrypt = require('bcrypt');
 
+// var RedisStore = require("connect-redis")(session);
+// let redisClient = redis.createClient();
+
 var app = express();
+
+var io = require('socket.io')();
+app.io = io;
+passportSocketIo = require("passport.socketio");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,8 +46,9 @@ cookieExpirationDate.setDate(cookieExpirationDate.getDate() + cookieExpirationDa
 
 app.use(session({
 	secret: 'asdf33g4w4hghjkuil8saef345', // must match with the secret for cookie-parser
-	resave: true,
-	saveUninitialized: true,
+  resave: true,
+  saveUninitialized: true,
+  //store: new RedisStore({ client: redisClient, ttl : 260 }),
 	cookie: {
 	    httpOnly: true,
 	    expires: cookieExpirationDate // use expires instead of maxAge
@@ -121,5 +130,32 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// io.use(passportSocketIo.authorize({
+//   cookieParser: cookieParser,       // the same middleware you registrer in express
+//   key:          'asdf33g4w4hghjkuil8saef345',       // the name of the cookie where express/connect stores its session_id
+//   secret:       'asdf33g4w4hghjkuil8saef345',    // the session_secret to parse the cookie
+//   store:        RedisStore,        // we NEED to use a sessionstore. no memorystore please
+//   success:      onAuthorizeSuccess,  // *optional* callback on success - read more below
+//   fail:         onAuthorizeFail,     // *optional* callback on fail/error - read more below
+// }));
+
+// function onAuthorizeSuccess(data, accept){
+//   console.log('successful connection to socket.io');
+//   // The accept-callback still allows us to decide whether to
+//   // accept the connection or not.
+//   accept(null, true);
+// }
+
+// function onAuthorizeFail(data, message, error, accept){
+//   if(error)
+//     throw new Error(message);
+//   console.log('failed connection to socket.io:', message);
+
+//   // We use this callback to log all of our failed connections.
+//   accept(null, false);
+// }
+
+require('./routes/socket')(io);
 
 module.exports = app;

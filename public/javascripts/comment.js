@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 	$('#comment_btn').click(function(e){
 		e.preventDefault(); // prevents page reloading
-		socket.emit('chat message', $('#mycomment').val());
+		socket.emit('chat message', $('#mycomment').val(), $('#account_name').text());
 		$('#mycomment').val('');
 		return false;
 	});

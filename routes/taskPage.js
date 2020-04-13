@@ -9,7 +9,7 @@ router.get('/:id',(req, res)=>{
 			res.render('task',{task:'err'});
 		}else{
 			if(result._id !== null)
-				res.render('task',{task: result, show_id: req.user.id, moment: require('moment')});
+				res.render('task',{task: result, show_id: req.user.id, show_username: req.user.username, moment: require('moment')});
 			else
 				res.render('task',{task:'err'});
 		}
