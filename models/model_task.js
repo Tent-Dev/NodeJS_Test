@@ -19,7 +19,12 @@ const taskSchema = new Schema({
 	comment:[{
 		//_id: false,
 		account_id: ObjectId,
-		comment_desc: String
+		comment_desc: String,
+		username: String,
+		time : {
+			type : Date,
+			default: Date.now
+		}
 	}]
 });
 

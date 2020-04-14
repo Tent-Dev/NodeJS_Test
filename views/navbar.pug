@@ -2,12 +2,23 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
 		a.navbar-brand(href='#') NodeJS-App
 		button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNavAltMarkup', aria-controls='navbarNavAltMarkup', aria-expanded='false', aria-label='Toggle navigation')
 			span.navbar-toggler-icon
-		div#navbarText.collapse.navbar-collapse
+		div#navbarNavAltMarkup.collapse.navbar-collapse
 			ul.navbar-nav.mr-auto
 				a.nav-item.nav-link(href='/home') Home 
 				a.nav-item.nav-link(href='/manage') Manage Data
 				a.nav-item.nav-link(href='#') Pricing
-				a.nav-item.nav-link.disabled(href='#', tabindex='-1', aria-disabled='true') Disabled
+
+			span.nav-item.dropdown
+				a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false' style='color: white;')
+					| #{show_username}
+				.dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+					a.dropdown-item(href='#')
+						i(class="fas fa-cog")
+						|&nbsp;Setting
+					a.dropdown-item(href='#')
+						i(class="fas fa-key")
+						|&nbsp;Change password
+
 			span.navbar-text
 				a(href='/logout')
 					button#logout.btn.btn-sm.btn-outline-warning(type='button')

@@ -23,11 +23,14 @@ block nav
 								div(style='font-size:0.75em;')
 									i(class="fas fa-user")
 									|&nbsp;#{data.account}
-								div(style='font-size:0.75em;')
-									span(class='like-count' data-id= data._id)
-										|#{data.likes_count}
-									|&nbsp;
-									i(class="fas fa-heart", style='color: #d82c2c;')
+								.row
+									div.col-6(style='font-size:0.75em;')
+										span(class='like-count' data-id= data._id)
+											|#{data.likes_count}
+										|&nbsp;
+										i(class="fas fa-heart", style='color: #d82c2c;')
+									div.col-6(style='font-size:0.75em;' align='right')
+										|&nbsp;#{data.comment.length} comment
 							.card-body
 								div #{data.desc}
 							.card-footer
