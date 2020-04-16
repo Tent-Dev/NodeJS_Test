@@ -23,19 +23,27 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/home', isLoggedIn, (req, res) => {
+  const {page} = req.query;
+  const options = {
+  page: parseInt(page, 10) || 1,
+  limit: 3
+  }
+
   console.log('Welcome');
   console.log('======> Result: Finding...');
-  CRUD_Task.find({},(function(err, result){
+  CRUD_Task.paginate({}, options, function(err, result){
     if (err) throw err;
     console.log('======> Result: Below');
     console.log(result);
     res.render('home',{
       show_username: req.user.username,
       show_id: req.user.id,
-      task: result,
+      task: result.docs,
+      page: result.page,
+      totalPages: result.totalPages,
       moment: require('moment')
     });
-  }))
+  })
 });
 
 router.get('/manage', isLoggedIn, (req, res) => {

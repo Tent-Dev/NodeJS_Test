@@ -43,6 +43,19 @@ block nav
 										button(class='like_btn btn btn-sm btn-outline-primary' data-id= data._id style='margin-left: 10px;')
 											i(class="far fa-thumbs-up")
 											|&nbsp;Like
+		//- pagination
+		-var n = 1;
+		nav(aria-label='Page navigation example')
+			ul.pagination.justify-content-center
+				if page != 1
+					li.page-item
+						a.page-link(href=`?page=${page-1}`) Previous
+				while n <= totalPages
+					li.page-item(class=(n == page ? 'active': ''))
+						a.page-link(href=`?page=${n}`)= n++
+				if page < totalPages
+					li.page-item
+						a.page-link(href=`?page=${page+1}`) Next
 
 	//Script
 	script(src="./javascripts/Like.js")

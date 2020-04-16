@@ -32,6 +32,7 @@ block nav
 						.col-12(align="right" style="font-size: 0.75em;")
 							|Last modify : #{moment(task.time).format("DD-MM-YYYY HH:mm")}
 					.card-footer
+						//- comment list
 						.col-12.row#comment
 							each data in task.comment
 								.col-12.comment_show.row.shadow-sm
@@ -46,6 +47,7 @@ block nav
 													|#{moment(data.time).format("DD-MM-YYYY HH:mm")}
 											.comment_box
 												|#{data.comment_desc}
+						//- comment_box
 						.col-12.row.form-group(style='margin-top: 10px;')
 							.col-1(style='align-self: center;')
 								img(src="../images/user.png" width="50px" hight="50px" class='rounded-circle')

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const taskSchema = new Schema({
@@ -27,6 +28,8 @@ const taskSchema = new Schema({
 		}
 	}]
 });
+
+taskSchema.plugin(mongoosePaginate);
 
 const TaskModel = mongoose.model('tasklists', taskSchema ,'tasklists');
 
