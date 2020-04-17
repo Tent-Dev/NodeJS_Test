@@ -1,7 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const CRUD = require('../models/model_user');
+const path = require('path');
 const CRUD_Task = require('../models/model_task');
+
+//uploadimage
+var multer  = require('multer')
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/images/uploads_image_profile')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+var upload = multer({ storage: storage })
 
 router.post('/add', async (req, res) => {
 	var id = req.user.id;
@@ -121,6 +134,15 @@ router.post('/check_liked/:id',(req, res)=>{
 			res.json({success: true, data: result.liked});
 		}
 	})
+})
+
+router.post('/upload_image_profile', upload.single('avatar'),(req, res)=>{
+	console.log("======>Uploaded ******************\n File name: "+
+				req.file.filename+'\nPath: '+
+				req.file.path+'\nSize: '+
+				req.file.size+
+				'\n************************************');
+	res.send(req.file);
 })
 
 

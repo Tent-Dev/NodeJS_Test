@@ -62,6 +62,14 @@ router.get('/manage', isLoggedIn, (req, res) => {
   }))
 });
 
+router.get('/account_setting', isLoggedIn, (req, res) => {
+  res.render('account_setting',{
+    show_username: req.user.username,
+    show_id: req.user.id,
+    show_name: req.user.name
+  });
+});
+
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');

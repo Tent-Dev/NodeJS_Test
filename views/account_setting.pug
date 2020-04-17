@@ -1,0 +1,35 @@
+extends layout.pug
+block nav
+	include navbar.pug
+	block content
+	div.container-md
+		div.col-12.text-center.card(style='margin-top: 10px; padding: 10px;')
+
+			.row.col-12
+				.col-2(align='right')
+					|Username
+				.col-4
+					input.form-control#username_edit(type="text", name="", value=`${show_username}` readonly)
+			hr(width='80%' style='align-self: center;')
+
+			.row.col-12
+				.col-2(align='right')
+					|Name
+				.col-4
+					input.form-control#name_edit(type="text", name="", value=`${show_name}`)
+			hr(width='80%' style='align-self: center;')
+
+			.row.col-12
+				.col-2(align='right')
+					|Profile image
+				.col-4
+					.col-12
+						img#preview_image(src="../images/user.png", alt="", hight="100px", width="100px")
+					.col-12
+						input.form-control#image_edit(type="file", name="avatar" multiple, accept="image/*")
+					.col-12(align='left', style='margin-top: 10px;')
+						button.btn.btn-primary.btn-sm#upload_image_btn Upload
+			hr(width='80%' style='align-self: center;')
+
+	//Script
+	script(src="./javascripts/account_setting.js")

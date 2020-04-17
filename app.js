@@ -73,6 +73,7 @@ passport.use(
                       callback(null,{
                           id: user._id,
                           liked: user.liked,
+                          name: user.name,
                           username: user.username,
                           password: user.password
                       })
