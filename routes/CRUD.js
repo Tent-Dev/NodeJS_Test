@@ -3,12 +3,16 @@ const router = express.Router();
 const CRUD = require('../models/model_user');
 const path = require('path');
 const CRUD_Task = require('../models/model_task');
+const sharp = require('sharp');
+
 
 //uploadimage
+var fs = require('fs');
 var multer  = require('multer')
+var dir_img = './public/images/uploads_image_profile';
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/images/uploads_image_profile')
+        cb(null, dir_img)
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
@@ -142,6 +146,21 @@ router.post('/upload_image_profile', upload.single('avatar'),(req, res)=>{
 				req.file.path+'\nSize: '+
 				req.file.size+
 				'\n************************************');
+	var dir_img_resize = dir_img +'/resize/'+req.file.filename;
+	sharp(req.file.path).resize(150, 150).toFile(dir_img_resize, (err, info) => {
+		if(err){
+			console.log(err);
+		}else{
+			console.log(info);
+			fs.unlink(req.file.path,(err2)=>{
+				if(err2){
+					console.log(err2);
+				}else{
+					console.log('======>Delete original image: success');
+				}
+			})
+		}
+	});
 	res.send(req.file);
 })
 

@@ -13,6 +13,8 @@
     "debug": "^2.6.9",
     "express": "^4.16.4",
     "express-session": "^1.17.0",
+    "fs": "0.0.1-security",
+    "gm": "^1.23.1",
     "http-errors": "^1.6.3",
     "moment": "^2.24.0",
     "mongo": "^0.1.0",
@@ -27,6 +29,7 @@
     "pug": "^2.0.0-beta11",
     "redis": "^3.0.2",
     "redis-server": "^1.2.2",
+    "sharp": "^0.25.2",
     "socket.io": "^2.3.0"
   }
 }

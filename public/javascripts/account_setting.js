@@ -1,5 +1,4 @@
 $(function () {
-
 	$("#image_edit").change(function() {
 		previewImage(this);
 	});
